@@ -5,24 +5,69 @@ namespace QueenAttackNS
 {
   public class QueenAttack
   {
-    public int xQueen;
-    public int yQueen;
-    public int xOpponant;
-    public int yOpponant;
+    private int _xQueen;
+    private int _yQueen;
+    private int _xOpponant;
+    private int _yOpponant;
 
-    public bool QueenAttackCheck(int xQueen, int yQueen, int xOpponant, int yOpponant)
+    public void setXQueen(int xQueenSet)
     {
-      if(xQueen == xOpponant || yQueen == yOpponant)
+      _xQueen = xQueenSet;
+    }
+    public int getXQueen()
+    {
+      return _xQueen;
+    }
+
+    public void setYQueen(int yQueenSet)
+    {
+      _yQueen = yQueenSet;
+    }
+    public int getYQueen()
+    {
+      return _yQueen;
+    }
+
+    public void setXOpponant(int xOpponantSet)
+    {
+      _xOpponant = xOpponantSet;
+    }
+    public int getXOpponant()
+    {
+      return _xOpponant;
+    }
+
+    public void setYOpponant(int yOpponantSet)
+    {
+      _yOpponant = yOpponantSet;
+    }
+    public int getYOpponant()
+    {
+      return _yOpponant;
+    }
+
+    public void setCoords()
+    {
+      Console.WriteLine("Let's check and see if the Queen chess piece can attack another piece on the board (assuming no other piece in between).");
+      Console.WriteLine("Enter the which row(X) the Queen is in:");
+      setXQueen(int.Parse(Console.ReadLine()));
+      Console.WriteLine("Enter the which column(Y) the Queen is in:");
+      setYQueen(int.Parse(Console.ReadLine()));
+      Console.WriteLine("Now enter the which row(X) the opposing piece is in:");
+      setXOpponant(int.Parse(Console.ReadLine()));
+      Console.WriteLine("And which column(Y) the opposing piece is in:");
+      setYOpponant(int.Parse(Console.ReadLine()));
+    }
+
+    public void QueenAttackCheck(int xQueen, int yQueen, int xOpponant, int yOpponant)
+    {
+      if(xQueen == xOpponant || yQueen == yOpponant || (Math.Abs(xQueen - xOpponant) == Math.Abs(yQueen - yOpponant)))
       {
-      return true;
-      }
-      else if(Math.Abs(xQueen - xOpponant) == Math.Abs(yQueen - yOpponant))
-      {
-        return true;
+        Console.WriteLine("The Queen can make this attack");
       }
       else
       {
-        return false;
+        Console.WriteLine("The Queen cannot make this attack");
       }
     }
   }
@@ -31,12 +76,13 @@ namespace QueenAttackNS
   {
     public static void Main()
     {
-      Console.WriteLine("Let's check and see if the Queen chess piece can attack another piece on the board (assuming no other piece in between).");
-      Console.WriteLine("Enter the which row the Queen is in:");
-      Console.WriteLine("Enter the which column the Queen is in:");
-      Console.WriteLine("Now enter the which row the opposing piece is in:");
-      Console.WriteLine("And which column the opposing piece is in:");
-
+      QueenAttack newAttack = new QueenAttack();
+      newAttack.setCoords();
+      int xQueen = newAttack.getXQueen();
+      int yQueen = newAttack.getYQueen();
+      int xOpponant = newAttack.getXOpponant();
+      int yOpponant = newAttack.getYOpponant();
+      newAttack.QueenAttackCheck(xQueen, yQueen, xOpponant, yOpponant);
     }
   }
 }
